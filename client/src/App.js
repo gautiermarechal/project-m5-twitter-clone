@@ -14,36 +14,49 @@ import Profile from "./components/Profile/index";
 import TweetDetails from "./components/TweetDetails/index";
 import GlobalStyles from "./components/GlobalStyles/index";
 import SideBar from "./components/SideBar/index";
+import Loading from "./components/Loading";
+
+//Context imports
+import { useCurrentUserContext } from "./context/CurrentUserContext";
 
 const App = () => {
+  const { status } = useCurrentUserContext();
   return (
     <>
       <GlobalStyles />
       <Wrapper>
-        <AppContainer>
-          <Router>
-            <SideBarContainer>
-              <SideBar />
-            </SideBarContainer>
+        <Router>
+          <SideBarContainer>
+            <SideBar />
+          </SideBarContainer>
+          <AppContainer>
             <Switch>
-              <Route exact path="/">
-                <HomeFeed />
-              </Route>
-              <Route path="/bookmarks">
-                <Bookmarks />
-              </Route>
-              <Route path="/notifications">
-                <Notifications />
-              </Route>
-              <Route path="/tweet/:tweetId">
-                <TweetDetails />
-              </Route>
-              <Route path="/:profileId">
-                <Profile />
-              </Route>
+              {status === "loading" ? (
+                <Route path="/">
+                  <Loading />
+                </Route>
+              ) : (
+                <>
+                  <Route exact path="/">
+                    <HomeFeed />
+                  </Route>
+                  <Route path="/bookmarks">
+                    <Bookmarks />
+                  </Route>
+                  <Route path="/notifications">
+                    <Notifications />
+                  </Route>
+                  <Route path="/tweet/:tweetId">
+                    <TweetDetails />
+                  </Route>
+                  <Route path="/:profileId">
+                    <Profile />
+                  </Route>
+                </>
+              )}
             </Switch>
-          </Router>
-        </AppContainer>
+          </AppContainer>
+        </Router>
       </Wrapper>
     </>
   );

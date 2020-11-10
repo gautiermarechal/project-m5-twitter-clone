@@ -11,10 +11,8 @@ const SideBar = () => {
     <>
       <MainContainer>
         <Menu>
-          <Item to="/">
-            <CitterLogo />
-          </Item>
-          <Item to="/">
+          <CitterLogo />
+          <Item exact to="/">
             <Logo>
               <BiHomeAlt />
             </Logo>
@@ -56,6 +54,7 @@ const Menu = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 20px;
+  margin-top: 20px;
 `;
 
 const Item = styled(NavLink)`
@@ -75,9 +74,8 @@ const Item = styled(NavLink)`
     cursor: pointer;
   }
 
-  &:active {
+  &.active {
     color: ${COLORS.primary};
-    background-color: ${COLORS.secondary};
     border-radius: 50px;
     cursor: pointer;
   }
