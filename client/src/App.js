@@ -1,7 +1,8 @@
 //Dependencies Imports
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
+import history from "./history";
 
 //Constants Imports
 import { SIZES } from "./constants/constants";
@@ -18,15 +19,15 @@ import Loading from "./components/Loading";
 
 //Context imports
 import { useCurrentUserContext } from "./context/CurrentUserContext";
-import { TweetsContextProvider } from "./context/TweetsContext";
 
 const App = () => {
   const { status } = useCurrentUserContext();
+
   return (
     <>
       <GlobalStyles />
       <Wrapper>
-        <Router>
+        <Router history={history}>
           <SideBarContainer>
             <SideBar />
           </SideBarContainer>

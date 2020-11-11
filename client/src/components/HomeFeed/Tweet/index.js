@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import { FaRegComment } from "react-icons/fa";
 import { AiOutlineRetweet } from "react-icons/ai";
@@ -6,14 +6,62 @@ import { RiHeart3Line } from "react-icons/ri";
 import { BsDownload } from "react-icons/bs";
 import { COLORS } from "../../../constants/constants";
 import moment from "moment";
+import history from "../../../history";
+import { useTweetsContext } from "../../../context/TweetsContext";
 
-const Tweet = ({ avatarSrc, userTag, userName, date, content, media }) => {
+const Tweet = ({
+  id,
+  avatarSrc,
+  userTag,
+  userName,
+  date,
+  content,
+  media,
+  numLikes,
+  numRetweets,
+}) => {
   let m = moment(date).format("MMM Do");
+  const isRemoteSrcAvatar = avatarSrc.substring(0, 5) === "https";
+  const {
+    handleSingleTweetLocalStorage,
+    handleSingleTweetState,
+    incrementLikes,
+    incremenrRetweets,
+  } = useTweetsContext();
+
+  const handleSingletweet = () => {
+    handleSingleTweetLocalStorage({
+      id,
+      avatarSrc,
+      userTag,
+      userName,
+      date,
+      content,
+      media,
+    });
+    handleSingleTweetState({
+      id,
+      avatarSrc,
+      userTag,
+      userName,
+      date,
+      content,
+      media,
+    });
+    history.push(`/tweet/${id}`);
+  };
+
   return (
     <>
-      <MainContainer>
+      <MainContainer onClick={handleSingletweet}>
         <UserInfo>
-          <UserPhoto src={avatarSrc} />
+          <UserPhoto
+            src={
+              isRemoteSrcAvatar
+                ? avatarSrc
+                : `http://localhost:31415${avatarSrc}`
+            }
+          />
           <UserTagName>{userTag}</UserTagName>
           <UserName>@{userName}</UserName>
           <Point>·</Point>
@@ -22,20 +70,37 @@ const Tweet = ({ avatarSrc, userTag, userName, date, content, media }) => {
         <Content>
           {content}
 
-          {media.map((media) => (
-            <MediaImage src={media.url}></MediaImage>
-          ))}
+          {media.map((media, index) => {
+            const isRemoteMedia = media.url.substring(0, 5) === "https";
+            return (
+              <MediaImage
+                key={index}
+                src={
+                  isRemoteMedia
+                    ? media.url
+                    : `http://localhost:31415${media.url}`
+                }
+              ></MediaImage>
+            );
+          })}
         </Content>
         <ActionBar>
           <Action color={"commentColor"} colorHover={"commentColorHover"}>
             <FaRegComment />
           </Action>
-          <Action color={"retweetColor"} colorHover={"retweetColorHover"}>
-            <AiOutlineRetweet />
-          </Action>
-          <Action color={"likeColor"} colorHover={"likeColorHover"}>
-            <RiHeart3Line />
-          </Action>
+          <ActionContainer>
+            <Action color={"retweetColor"} colorHover={"retweetColorHover"}>
+              <AiOutlineRetweet />
+            </Action>
+            {numRetweets !== 0 && numRetweets}
+          </ActionContainer>
+          <ActionContainer>
+            <Action color={"likeColor"} colorHover={"likeColorHover"}>
+              <RiHeart3Line />
+            </Action>
+            {numLikes !== 0 && numLikes}
+          </ActionContainer>
+
           <Action color={"bookmarkColor"} colorHover={"bookmarkColorHover"}>
             <BsDownload />
           </Action>
@@ -99,12 +164,19 @@ const ActionBar = styled.div`
   margin-left: 69px;
 `;
 
+const ActionContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const Action = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   border-style: none;
+  margin-right: 5px;
   height: 37.5px;
   width: 37.5px;
   background: transparent;

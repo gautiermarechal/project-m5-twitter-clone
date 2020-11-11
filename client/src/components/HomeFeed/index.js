@@ -15,12 +15,15 @@ const HomeFeed = () => {
         return (
           <Tweet
             key={tweet.id}
+            id={tweet.id}
             avatarSrc={tweet.author.avatarSrc}
             userTag={tweet.author.displayName}
             userName={tweet.author.handle}
             date={tweet.timestamp}
             content={tweet.status}
             media={tweet.media}
+            numLikes={tweet.numLikes}
+            numRetweets={tweet.numRetweets}
           />
         );
       })}

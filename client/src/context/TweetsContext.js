@@ -4,7 +4,7 @@ export const TweetsContext = createContext({});
 
 export const TweetsContextProvider = ({ children }) => {
   const [homeFeedTweets, setHomeFeedTweets] = useState([]);
-  const [tweetFocused, setTweetFocused] = useState({});
+  const [singleTweet, setSingletweet] = useState({});
 
   //Retrieve all home feed tweets
   const handleHomeFeedTweets = () => {
@@ -21,15 +21,38 @@ export const TweetsContextProvider = ({ children }) => {
       });
   };
 
-  //Retrieve tweet to focus on
-  //....
+  //Move single tweet info to local storage
+  const handleSingleTweetLocalStorage = (objTweet) => {
+    localStorage.setItem("single-tweet", JSON.stringify(objTweet));
+  };
 
+  //Update single tweet state
+  const handleSingleTweetState = (objTweet) => {
+    setSingletweet(objTweet);
+  };
+
+  //Increment number of likes
+  const incrementLikes = () => {
+    setSingletweet({ ...singleTweet, numLikes: singleTweet.numLikes + 1 });
+  };
+
+  //Increment number of retweets
+  const incrementRetweets = () => {
+    setSingletweet({
+      ...singleTweet,
+      numRetweets: singleTweet.numRetweets + 1,
+    });
+  };
   return (
     <TweetsContext.Provider
       value={{
         homeFeedTweets,
-        tweetFocused,
+        singleTweet,
         handleHomeFeedTweets,
+        handleSingleTweetLocalStorage,
+        handleSingleTweetState,
+        incrementLikes,
+        incrementRetweets,
       }}
     >
       {children}
