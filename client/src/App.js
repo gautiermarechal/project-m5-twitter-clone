@@ -18,6 +18,7 @@ import Loading from "./components/Loading";
 
 //Context imports
 import { useCurrentUserContext } from "./context/CurrentUserContext";
+import { TweetsContextProvider } from "./context/TweetsContext";
 
 const App = () => {
   const { status } = useCurrentUserContext();

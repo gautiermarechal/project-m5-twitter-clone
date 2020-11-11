@@ -4,11 +4,14 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { CurrentUserContextProvider } from "./context/CurrentUserContext";
+import { TweetsContextProvider } from "./context/TweetsContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <CurrentUserContextProvider>
-      <App />
+      <TweetsContextProvider>
+        <App />
+      </TweetsContextProvider>
     </CurrentUserContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
