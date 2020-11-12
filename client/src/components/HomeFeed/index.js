@@ -19,6 +19,7 @@ const HomeFeed = () => {
             avatarSrc={tweet.author.avatarSrc}
             userTag={tweet.author.displayName}
             userName={tweet.author.handle}
+            profileObj={tweet.author}
             date={tweet.timestamp}
             content={tweet.status}
             media={tweet.media}

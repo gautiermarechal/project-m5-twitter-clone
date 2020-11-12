@@ -11,6 +11,7 @@ const Tweet = ({
   avatarSrc,
   userTag,
   userName,
+  profileObj,
   date,
   content,
   media,
@@ -22,8 +23,8 @@ const Tweet = ({
   const {
     handleSingleTweetLocalStorage,
     handleSingleTweetState,
-    incrementLikes,
-    incrementRetweets,
+    handleCurrentProfileState,
+    handleCurrentProfilLocalStorage,
   } = useTweetsContext();
 
   const handleSingletweet = () => {
@@ -48,6 +49,13 @@ const Tweet = ({
     history.push(`/tweet/${id}`);
   };
 
+  const handleProfile = (e) => {
+    e.stopPropagation();
+    handleCurrentProfilLocalStorage(profileObj);
+    handleCurrentProfileState(profileObj.handle);
+    history.push(`/${profileObj.handle}`);
+  };
+
   return (
     <>
       <MainContainer onClick={handleSingletweet}>
@@ -59,8 +67,8 @@ const Tweet = ({
                 : `http://localhost:31415${avatarSrc}`
             }
           />
-          <UserTagName>{userTag}</UserTagName>
-          <UserName>@{userName}</UserName>
+          <UserTagName onClick={(e) => handleProfile(e)}>{userTag}</UserTagName>
+          <UserName onClick={(e) => handleProfile(e)}>@{userName}</UserName>
           <Point>·</Point>
           <Date>{m}</Date>
         </UserInfo>

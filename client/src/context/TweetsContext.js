@@ -5,6 +5,7 @@ export const TweetsContext = createContext({});
 export const TweetsContextProvider = ({ children }) => {
   const [homeFeedTweets, setHomeFeedTweets] = useState([]);
   const [singleTweet, setSingletweet] = useState({});
+  const [currentProfile, setCurrentProfile] = useState({});
 
   //Retrieve all home feed tweets
   const handleHomeFeedTweets = () => {
@@ -63,6 +64,16 @@ export const TweetsContextProvider = ({ children }) => {
 
     setHomeFeedTweets([...homeFeedTweets], tweetIsRetweeted);
   };
+
+  //Set Current profile localstorage
+  const handleCurrentProfilLocalStorage = (profileObj) => {
+    localStorage.setItem("current-profile", JSON.stringify(profileObj));
+  };
+
+  //Set Current profile state
+  const handleCurrentProfileState = (profileObj) => {
+    setCurrentProfile(profileObj);
+  };
   return (
     <TweetsContext.Provider
       value={{
@@ -73,6 +84,9 @@ export const TweetsContextProvider = ({ children }) => {
         handleSingleTweetState,
         incrementLikes,
         incrementRetweets,
+        currentProfile,
+        handleCurrentProfileState,
+        handleCurrentProfilLocalStorage,
       }}
     >
       {children}
