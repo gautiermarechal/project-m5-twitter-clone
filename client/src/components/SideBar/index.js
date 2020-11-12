@@ -5,8 +5,10 @@ import { BiHomeAlt } from "react-icons/bi";
 import { BsPerson, BsBell, BsBookmark } from "react-icons/bs";
 import { ReactComponent as CitterLogo } from "../../assets/logo.svg";
 import { NavLink } from "react-router-dom";
+import { useCurrentUserContext } from "../../context/CurrentUserContext";
 
 const SideBar = () => {
+  const { currentUser } = useCurrentUserContext();
   return (
     <>
       <MainContainer>

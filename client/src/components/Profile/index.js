@@ -4,6 +4,7 @@ import { COLORS } from "../../constants/constants";
 import { GoLocation } from "react-icons/go";
 import { BiCalendarAlt } from "react-icons/bi";
 import moment from "moment";
+import UserTweets from "./UserTweets";
 const Profile = () => {
   const [active, setActive] = useState("Tweets");
 
@@ -84,6 +85,7 @@ const Profile = () => {
             Likes
           </NavButton>
         </Navigation>
+        <UserTweets currentProfile={currentProfile} />
       </BannerContainer>
     </>
   );

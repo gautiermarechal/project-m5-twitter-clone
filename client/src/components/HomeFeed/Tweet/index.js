@@ -5,6 +5,7 @@ import moment from "moment";
 import history from "../../../history";
 import { useTweetsContext } from "../../../context/TweetsContext";
 import ActionBarComponent from "./ActionBar";
+import { AiOutlineRetweet } from "react-icons/ai";
 
 const Tweet = ({
   id,
@@ -17,6 +18,7 @@ const Tweet = ({
   media,
   numLikes,
   numRetweets,
+  retweetFrom,
 }) => {
   let m = moment(date).format("MMM Do");
   const isRemoteSrcAvatar = avatarSrc.substring(0, 5) === "https";
@@ -59,6 +61,12 @@ const Tweet = ({
   return (
     <>
       <MainContainer onClick={handleSingletweet}>
+        {retweetFrom && (
+          <RetweetFrom>
+            <AiOutlineRetweet style={{ marginRight: "10px" }} />
+            {retweetFrom.displayName} Remeowed
+          </RetweetFrom>
+        )}
         <UserInfo>
           <UserPhoto
             src={
@@ -149,6 +157,14 @@ const MediaImage = styled.img`
   width: 100%;
   border-radius: 10px;
   margin-top: 20px;
+`;
+
+const RetweetFrom = styled.div`
+  display: flex;
+  align-items: center;
+  color: grey;
+  margin-bottom: 15px;
+  margin-left: 69px;
 `;
 
 export default Tweet;
