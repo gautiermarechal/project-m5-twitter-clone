@@ -36,17 +36,23 @@ export const TweetsContextProvider = ({ children }) => {
   const incrementLikes = (e, id) => {
     e.stopPropagation();
     console.log(id);
-    const tweetLiked = homeFeedTweets.find((tweet) => tweet.id === id);
+    fetch(`http://localhost:31415/api/tweet/${id}/like`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ like: true }),
+    });
+    // console.log(id);
+    // const tweetLiked = homeFeedTweets.find((tweet) => tweet.id === id);
 
-    if (!tweetLiked.isLiked) {
-      tweetLiked.isLiked = !tweetLiked.isLiked;
-      tweetLiked.numLikes += 1;
-    } else {
-      tweetLiked.isLiked = !tweetLiked.isLiked;
-      tweetLiked.numLikes -= 1;
-    }
+    // if (!tweetLiked.isLiked) {
+    //   tweetLiked.isLiked = !tweetLiked.isLiked;
+    //   tweetLiked.numLikes += 1;
+    // } else {
+    //   tweetLiked.isLiked = !tweetLiked.isLiked;
+    //   tweetLiked.numLikes -= 1;
+    // }
 
-    setHomeFeedTweets([...homeFeedTweets], tweetLiked);
+    // setHomeFeedTweets([...homeFeedTweets], tweetLiked);
   };
 
   //Increment number of retweets
