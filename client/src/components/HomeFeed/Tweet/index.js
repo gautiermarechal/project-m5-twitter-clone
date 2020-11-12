@@ -26,7 +26,7 @@ const Tweet = ({
     handleSingleTweetLocalStorage,
     handleSingleTweetState,
     incrementLikes,
-    incremenrRetweets,
+    incrementRetweets,
   } = useTweetsContext();
 
   const handleSingletweet = () => {
@@ -95,7 +95,11 @@ const Tweet = ({
             {numRetweets !== 0 && numRetweets}
           </ActionContainer>
           <ActionContainer>
-            <Action color={"likeColor"} colorHover={"likeColorHover"}>
+            <Action
+              color={"likeColor"}
+              colorHover={"likeColorHover"}
+              onClick={() => incrementLikes}
+            >
               <RiHeart3Line />
             </Action>
             {numLikes !== 0 && numLikes}
