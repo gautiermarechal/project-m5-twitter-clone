@@ -1,13 +1,10 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
-import { FaRegComment } from "react-icons/fa";
-import { AiOutlineRetweet } from "react-icons/ai";
-import { RiHeart3Line } from "react-icons/ri";
-import { BsDownload } from "react-icons/bs";
 import { COLORS } from "../../../constants/constants";
 import moment from "moment";
 import history from "../../../history";
 import { useTweetsContext } from "../../../context/TweetsContext";
+import ActionBarComponent from "./ActionBar";
 
 const Tweet = ({
   id,
@@ -84,31 +81,11 @@ const Tweet = ({
             );
           })}
         </Content>
-        <ActionBar>
-          <Action color={"commentColor"} colorHover={"commentColorHover"}>
-            <FaRegComment />
-          </Action>
-          <ActionContainer>
-            <Action color={"retweetColor"} colorHover={"retweetColorHover"}>
-              <AiOutlineRetweet />
-            </Action>
-            {numRetweets !== 0 && numRetweets}
-          </ActionContainer>
-          <ActionContainer>
-            <Action
-              color={"likeColor"}
-              colorHover={"likeColorHover"}
-              onClick={() => incrementLikes}
-            >
-              <RiHeart3Line />
-            </Action>
-            {numLikes !== 0 && numLikes}
-          </ActionContainer>
-
-          <Action color={"bookmarkColor"} colorHover={"bookmarkColorHover"}>
-            <BsDownload />
-          </Action>
-        </ActionBar>
+        <ActionBarComponent
+          numLikes={numLikes}
+          numRetweets={numRetweets}
+          id={id}
+        />
       </MainContainer>
     </>
   );
@@ -158,47 +135,6 @@ const Date = styled.div`
 
 const Content = styled.div`
   margin-left: 69px;
-`;
-
-const ActionBar = styled.div`
-  display: flex;
-  width: 80%;
-  justify-content: space-between;
-  margin-top: 20px;
-  margin-left: 69px;
-`;
-
-const ActionContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Action = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  border-style: none;
-  margin-right: 5px;
-  height: 37.5px;
-  width: 37.5px;
-  background: transparent;
-
-  svg {
-    height: 18.75px;
-    width: 18.75px;
-    z-index: 1000;
-  }
-
-  &:hover {
-    cursor: pointer;
-    background-color: ${(props) => COLORS[props.colorHover]};
-
-    svg {
-      color: ${(props) => COLORS[props.color]};
-    }
-  }
 `;
 
 const MediaImage = styled.img`

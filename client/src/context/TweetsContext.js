@@ -32,16 +32,36 @@ export const TweetsContextProvider = ({ children }) => {
   };
 
   //Increment number of likes
-  const incrementLikes = () => {
-    setSingletweet({ ...singleTweet, numLikes: singleTweet.numLikes + 1 });
+  const incrementLikes = (e, id) => {
+    e.stopPropagation();
+    console.log(id);
+    const tweetLiked = homeFeedTweets.find((tweet) => tweet.id === id);
+
+    if (!tweetLiked.isLiked) {
+      tweetLiked.isLiked = !tweetLiked.isLiked;
+      tweetLiked.numLikes += 1;
+    } else {
+      tweetLiked.isLiked = !tweetLiked.isLiked;
+      tweetLiked.numLikes -= 1;
+    }
+
+    setHomeFeedTweets([...homeFeedTweets], tweetLiked);
   };
 
   //Increment number of retweets
-  const incrementRetweets = () => {
-    setSingletweet({
-      ...singleTweet,
-      numRetweets: singleTweet.numRetweets + 1,
-    });
+  const incrementRetweets = (e, id) => {
+    e.stopPropagation();
+    const tweetIsRetweeted = homeFeedTweets.find((tweet) => tweet.id === id);
+
+    if (!tweetIsRetweeted.isRetweeted) {
+      tweetIsRetweeted.isRetweeted = !tweetIsRetweeted.isRetweeted;
+      tweetIsRetweeted.numRetweets += 1;
+    } else {
+      tweetIsRetweeted.isRetweeted = !tweetIsRetweeted.isRetweeted;
+      tweetIsRetweeted.numRetweets -= 1;
+    }
+
+    setHomeFeedTweets([...homeFeedTweets], tweetIsRetweeted);
   };
   return (
     <TweetsContext.Provider

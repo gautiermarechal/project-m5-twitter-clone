@@ -1,18 +1,14 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useTweetsContext } from "../../context/TweetsContext";
-import { FaRegComment } from "react-icons/fa";
-import { AiOutlineRetweet } from "react-icons/ai";
-import { RiHeart3Line } from "react-icons/ri";
-import { BsDownload } from "react-icons/bs";
-import { COLORS } from "../../constants/constants";
 import moment from "moment";
+import ActionBarComponent from "../HomeFeed/Tweet/ActionBar";
 
 const TweetDetails = () => {
-  const { handleSingleTweetState } = useTweetsContext();
-
+  const { handleSingleTweetState, handleHomeFeedTweets } = useTweetsContext();
   useEffect(() => {
     handleSingleTweetState(JSON.parse(localStorage.getItem("single-tweet")));
+    handleHomeFeedTweets();
   }, []);
   const singleTweet = JSON.parse(localStorage.getItem("single-tweet"));
   let mHours = moment(singleTweet.date).format("HH:MM A");
@@ -60,20 +56,11 @@ const TweetDetails = () => {
             <Point>·</Point>
             <Date>Critter Web App</Date>
           </DateContainer>
-          <ActionBar>
-            <Action color={"commentColor"} colorHover={"commentColorHover"}>
-              <FaRegComment />
-            </Action>
-            <Action color={"retweetColor"} colorHover={"retweetColorHover"}>
-              <AiOutlineRetweet />
-            </Action>
-            <Action color={"likeColor"} colorHover={"likeColorHover"}>
-              <RiHeart3Line />
-            </Action>
-            <Action color={"bookmarkColor"} colorHover={"bookmarkColorHover"}>
-              <BsDownload />
-            </Action>
-          </ActionBar>
+          <ActionBarComponent
+            numLikes={singleTweet.numLikes}
+            numRetweets={singleTweet.numRetweets}
+            id={singleTweet.id}
+          />
         </MainContainer>
       )}
     </>
@@ -132,40 +119,6 @@ const Date = styled.div`
 
 const Content = styled.div`
   margin-left: 69px;
-`;
-
-const ActionBar = styled.div`
-  display: flex;
-  width: 80%;
-  justify-content: space-between;
-  margin-top: 20px;
-  margin-left: 69px;
-`;
-
-const Action = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  border-style: none;
-  height: 37.5px;
-  width: 37.5px;
-  background: transparent;
-
-  svg {
-    height: 18.75px;
-    width: 18.75px;
-    z-index: 1000;
-  }
-
-  &:hover {
-    cursor: pointer;
-    background-color: ${(props) => COLORS[props.colorHover]};
-
-    svg {
-      color: ${(props) => COLORS[props.color]};
-    }
-  }
 `;
 
 const MediaImage = styled.img`
