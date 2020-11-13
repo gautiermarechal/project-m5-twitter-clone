@@ -20,7 +20,7 @@ const SideBar = () => {
             </Logo>
             <ItemLabel>Home</ItemLabel>
           </Item>
-          <Item to={"/:profileId"}>
+          <Item to={`/profile/${currentUser.handle}`}>
             <Logo>
               <BsPerson />
             </Logo>

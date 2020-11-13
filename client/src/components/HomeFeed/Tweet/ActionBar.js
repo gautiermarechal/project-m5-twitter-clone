@@ -7,7 +7,13 @@ import { BsDownload } from "react-icons/bs";
 import { COLORS } from "../../../constants/constants";
 import { useTweetsContext } from "../../../context/TweetsContext";
 
-const ActionBarComponent = ({ numLikes, numRetweets, id }) => {
+const ActionBarComponent = ({
+  numLikes,
+  numRetweets,
+  id,
+  isLiked,
+  isRetweeted,
+}) => {
   const { incrementLikes, incrementRetweets } = useTweetsContext();
 
   return (
@@ -20,6 +26,7 @@ const ActionBarComponent = ({ numLikes, numRetweets, id }) => {
           color={"retweetColor"}
           colorHover={"retweetColorHover"}
           onClick={(e) => incrementRetweets(e, id)}
+          isRetweeted={isRetweeted}
         >
           <AiOutlineRetweet />
         </Action>
@@ -30,6 +37,7 @@ const ActionBarComponent = ({ numLikes, numRetweets, id }) => {
           color={"likeColor"}
           colorHover={"likeColorHover"}
           onClick={(e) => incrementLikes(e, id)}
+          isLiked={isLiked}
         >
           <RiHeart3Line />
         </Action>
@@ -65,12 +73,15 @@ const Action = styled.button`
   border-style: none;
   height: 37.5px;
   width: 37.5px;
-  background: transparent;
+  transition: 0.2s;
+  background-color: transparent;
 
   svg {
     height: 18.75px;
     width: 18.75px;
     z-index: 1000;
+    color: ${(props) => (props.isLiked ? "rgb(224, 36, 94)" : "none")};
+    color: ${(props) => (props.isRetweeted ? COLORS.retweetColor : "none")};
   }
 
   &:hover {

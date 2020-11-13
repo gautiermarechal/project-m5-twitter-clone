@@ -54,7 +54,7 @@ const App = () => {
                   <Route path="/tweet/:tweetId">
                     <TweetDetails />
                   </Route>
-                  <Route path="/:profileId">
+                  <Route path="/profile/:profileId">
                     <Profile />
                   </Route>
                 </>

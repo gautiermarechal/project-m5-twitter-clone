@@ -19,6 +19,8 @@ const Tweet = ({
   numLikes,
   numRetweets,
   retweetFrom,
+  isLiked,
+  isRetweeted,
 }) => {
   let m = moment(date).format("MMM Do");
   const isRemoteSrcAvatar = avatarSrc.substring(0, 5) === "https";
@@ -55,7 +57,7 @@ const Tweet = ({
     e.stopPropagation();
     handleCurrentProfilLocalStorage(profileObj);
     handleCurrentProfileState(profileObj.handle);
-    history.push(`/${profileObj.handle}`);
+    history.push(`/profile/${profileObj.handle}`);
   };
 
   return (
@@ -101,6 +103,8 @@ const Tweet = ({
           numLikes={numLikes}
           numRetweets={numRetweets}
           id={id}
+          isLiked={isLiked}
+          isRetweeted={isRetweeted}
         />
       </MainContainer>
     </>
@@ -114,6 +118,11 @@ const MainContainer = styled.div`
   flex-direction: column;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: 0.2s;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.07);
+  }
 `;
 
 const UserInfo = styled.div`
@@ -130,11 +139,17 @@ const UserPhoto = styled.img`
 const UserTagName = styled.div`
   font-weight: 800;
   margin-right: 10px;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const UserName = styled.div`
   color: grey;
   font-weight: 500;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Point = styled.span`

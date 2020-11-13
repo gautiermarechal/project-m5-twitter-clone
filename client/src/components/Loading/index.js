@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { COLORS } from "../../constants/constants";
+import { BiLoaderCircle } from "react-icons/bi";
 
 const Loading = ({ width, height }) => {
   const MainContainer = styled.div`
@@ -20,13 +21,14 @@ const Loading = ({ width, height }) => {
     }
 `;
 
-  const LoadSymbol = styled.div`
-    border: 7px solid #f3f3f3;
+  const LoadSymbol = styled(BiLoaderCircle)`
     border-radius: 50%;
-    border-top: 7px solid ${COLORS.primary};
+    border: 7px solid ${COLORS.primary};
+    // border-bottom: 7px solid ${COLORS.primary};
     width: 120px;
     height: 120px;
-    animation: ${SpinAnimation} 0.5s linear infinite;
+    color: ${COLORS.primary};
+    animation: ${SpinAnimation} 0.7s cubic-bezier(0.8, 0.7, 0.1, 0.5) infinite;
   `;
   return (
     <>

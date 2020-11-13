@@ -26,6 +26,8 @@ const HomeFeed = () => {
             media={tweet.media}
             numLikes={tweet.numLikes}
             numRetweets={tweet.numRetweets}
+            isLiked={tweet.isLiked}
+            isRetweeted={tweet.isRetweeted}
           />
         );
       })}
