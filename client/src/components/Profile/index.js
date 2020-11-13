@@ -19,7 +19,7 @@ const Profile = () => {
 
   return (
     <>
-      <BannerContainer>
+      <MainContainer>
         <Banner
           src={
             isRemoteBannerSrc
@@ -27,6 +27,7 @@ const Profile = () => {
               : `http://localhost:31415${currentProfile.bannerSrc}`
           }
         />
+
         <ProfileInfoContainer>
           <ProfilePictureContainer>
             <ProfilePicture
@@ -86,12 +87,14 @@ const Profile = () => {
           </NavButton>
         </Navigation>
         <UserTweets currentProfile={currentProfile} />
-      </BannerContainer>
+      </MainContainer>
     </>
   );
 };
 
-const BannerContainer = styled.div``;
+const MainContainer = styled.div`
+  padding-left: 69px;
+`;
 
 const Banner = styled.img`
   max-width: 600px;

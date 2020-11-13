@@ -7,7 +7,7 @@ const UserTweets = ({ currentProfile }) => {
   const { handleHomeFeedTweets, homeFeedTweets } = useTweetsContext();
   useEffect(() => {
     handleHomeFeedTweets();
-  });
+  }, []);
 
   return (
     <>

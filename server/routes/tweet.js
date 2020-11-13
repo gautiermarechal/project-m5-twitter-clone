@@ -24,6 +24,8 @@ const createTweet = (status, { isRetweet }) => {
     authorHandle: CURRENT_USER_HANDLE,
     timestamp,
     sortedTimestamp: timestamp,
+    likedBy: [],
+    retweetedBy: [],
   };
 
   if (isRetweet) {
@@ -76,8 +78,6 @@ router.put("/api/tweet/:tweetId/like", (req, res) => {
     res.sendStatus(404);
     return;
   }
-
-  console.log(req.body);
 
   if (typeof like !== "boolean") {
     res.status(400).json({

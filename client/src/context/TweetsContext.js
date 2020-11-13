@@ -35,40 +35,56 @@ export const TweetsContextProvider = ({ children }) => {
   //Increment number of likes
   const incrementLikes = (e, id) => {
     e.stopPropagation();
+
+    let tempIsLiked;
+    const updatedHomeFeedTweets = homeFeedTweets.map((tweet) => {
+      if (tweet.id === id) {
+        tempIsLiked = !tweet.isLiked;
+        const toggleNumLikes = tempIsLiked ? 1 : -1;
+        return {
+          ...tweet,
+          numLikes: tweet.numLikes + toggleNumLikes,
+          isLiked: !tweet.isLiked,
+        };
+      }
+      return tweet;
+    });
+
+    setHomeFeedTweets(updatedHomeFeedTweets);
+
     console.log(id);
     fetch(`http://localhost:31415/api/tweet/${id}/like`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ like: true }),
+      body: JSON.stringify({ like: tempIsLiked }),
     });
-    // console.log(id);
-    // const tweetLiked = homeFeedTweets.find((tweet) => tweet.id === id);
-
-    // if (!tweetLiked.isLiked) {
-    //   tweetLiked.isLiked = !tweetLiked.isLiked;
-    //   tweetLiked.numLikes += 1;
-    // } else {
-    //   tweetLiked.isLiked = !tweetLiked.isLiked;
-    //   tweetLiked.numLikes -= 1;
-    // }
-
-    // setHomeFeedTweets([...homeFeedTweets], tweetLiked);
   };
 
   //Increment number of retweets
   const incrementRetweets = (e, id) => {
     e.stopPropagation();
-    const tweetIsRetweeted = homeFeedTweets.find((tweet) => tweet.id === id);
+    let tempIsRetweeted;
+    const updatedHomeFeedTweets = homeFeedTweets.map((tweet) => {
+      if (tweet.id === id) {
+        tempIsRetweeted = !tweet.isRetweeted;
+        const toggleNumRetweets = tempIsRetweeted ? 1 : -1;
+        return {
+          ...tweet,
+          numRetweets: tweet.numRetweets + toggleNumRetweets,
+          isRetweeted: !tweet.isRetweeted,
+        };
+      }
+      return tweet;
+    });
 
-    if (!tweetIsRetweeted.isRetweeted) {
-      tweetIsRetweeted.isRetweeted = !tweetIsRetweeted.isRetweeted;
-      tweetIsRetweeted.numRetweets += 1;
-    } else {
-      tweetIsRetweeted.isRetweeted = !tweetIsRetweeted.isRetweeted;
-      tweetIsRetweeted.numRetweets -= 1;
-    }
+    setHomeFeedTweets(updatedHomeFeedTweets);
 
-    setHomeFeedTweets([...homeFeedTweets], tweetIsRetweeted);
+    console.log(id);
+    fetch(`http://localhost:31415/api/tweet/${id}/retweet`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ retweet: tempIsRetweeted }),
+    });
   };
 
   //Set Current profile localstorage
