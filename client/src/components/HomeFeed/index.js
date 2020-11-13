@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import styled from "styled-components";
 import { useTweetsContext } from "../../context/TweetsContext";
 import Tweet from "./Tweet/index";
 
@@ -10,7 +11,7 @@ const HomeFeed = () => {
   }, []);
 
   return (
-    <>
+    <HomeFeedContainer>
       {homeFeedTweets.map((tweet) => {
         return (
           <Tweet
@@ -28,8 +29,14 @@ const HomeFeed = () => {
           />
         );
       })}
-    </>
+    </HomeFeedContainer>
   );
 };
+
+const HomeFeedContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export default HomeFeed;

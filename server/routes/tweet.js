@@ -60,6 +60,7 @@ router.get("/api/tweet/:tweetId", (req, res) => {
  * Post a new tweet
  */
 router.post("/api/tweet", (req, res) => {
+  console.log(req.body);
   const newTweet = createTweet(req.body.status, { isRetweet: false });
   data.tweets[newTweet.id] = newTweet;
 
@@ -85,8 +86,6 @@ router.put("/api/tweet/:tweetId/like", (req, res) => {
     });
     return;
   }
-
-  console.log(tweet);
 
   // Disallow "repeat" requests (eg trying to like an already-liked tweet).
   const currentlyLiked = tweet.likedBy.includes(CURRENT_USER_HANDLE);

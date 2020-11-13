@@ -13,7 +13,7 @@ export const COLORS = {
 
 export const SIZES = {
   desktop: {
-    sideBarWidth: 300,
+    sideBarWidth: 350,
     sideBarHeightVH: 100,
   },
   mobile: {},

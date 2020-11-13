@@ -80,7 +80,7 @@ const Tweet = ({
           <Point>·</Point>
           <Date>{m}</Date>
         </UserInfo>
-        <Content>
+        <Content onClick={(e) => e.stopPropagation()}>
           {content}
 
           {media.map((media, index) => {
@@ -108,13 +108,12 @@ const Tweet = ({
 };
 
 const MainContainer = styled.div`
-  margin: 50px;
+  padding: 30px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  max-width: 568px;
-  //   border-style: solid;
-  //   border-color: grey;
-  //   border-width: 2px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 `;
 
 const UserInfo = styled.div`
@@ -151,6 +150,8 @@ const Date = styled.div`
 
 const Content = styled.div`
   margin-left: 69px;
+  max-width: 550px;
+  word-wrap: break-word;
 `;
 
 const MediaImage = styled.img`

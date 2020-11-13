@@ -92,13 +92,11 @@ const Profile = () => {
   );
 };
 
-const MainContainer = styled.div`
-  padding-left: 69px;
-`;
+const MainContainer = styled.div``;
 
 const Banner = styled.img`
-  max-width: 600px;
-  max-height: 200px;
+  width: 668px;
+  height: auto;
 `;
 
 const ProfileInfoContainer = styled.div`
@@ -169,6 +167,7 @@ const FollowsYou = styled.span`
 
 const Bio = styled.p`
   margin-top: 15px;
+  word-wrap: break-word;
 `;
 
 const Location = styled.div`
