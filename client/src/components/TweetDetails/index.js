@@ -11,6 +11,7 @@ const TweetDetails = () => {
     handleHomeFeedTweets();
   }, []);
   const singleTweet = JSON.parse(localStorage.getItem("single-tweet"));
+  console.log("SINGLE" + JSON.stringify(singleTweet));
   let mHours = moment(singleTweet.date).format("HH:MM A");
   let mDate = moment(singleTweet.date).format("MMM D YYYY");
   const isRemoteSrcAvatar = singleTweet.avatarSrc.substring(0, 5) === "https";
@@ -60,6 +61,8 @@ const TweetDetails = () => {
             numLikes={singleTweet.numLikes}
             numRetweets={singleTweet.numRetweets}
             id={singleTweet.id}
+            isLiked={singleTweet.isLiked}
+            isRetweeted={singleTweet.isRetweeted}
           />
         </MainContainer>
       )}

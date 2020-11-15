@@ -20,6 +20,7 @@ import Post from "./components/Post";
 
 //Context imports
 import { useCurrentUserContext } from "./context/CurrentUserContext";
+import ErrorPage from "./components/ErrorPage";
 
 const App = () => {
   const { status } = useCurrentUserContext();
@@ -54,8 +55,11 @@ const App = () => {
                   <Route path="/tweet/:tweetId">
                     <TweetDetails />
                   </Route>
-                  <Route path="/profile/:profileId">
+                  <Route path="/:profileId">
                     <Profile />
+                  </Route>
+                  <Route path="">
+                    <ErrorPage />
                   </Route>
                 </>
               )}

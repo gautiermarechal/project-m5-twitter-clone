@@ -40,6 +40,10 @@ const Tweet = ({
       date,
       content,
       media,
+      numLikes,
+      numRetweets,
+      isLiked,
+      isRetweeted,
     });
     handleSingleTweetState({
       id,
@@ -57,7 +61,8 @@ const Tweet = ({
     e.stopPropagation();
     handleCurrentProfilLocalStorage(profileObj);
     handleCurrentProfileState(profileObj.handle);
-    history.push(`/profile/${profileObj.handle}`);
+    history.push(`/${profileObj.handle}`);
+    window.location.reload();
   };
 
   return (

@@ -20,7 +20,16 @@ const SideBar = () => {
             </Logo>
             <ItemLabel>Home</ItemLabel>
           </Item>
-          <Item to={`/profile/${currentUser.handle}`}>
+          <Item
+            to={`/${currentUser.handle}`}
+            onClick={() => {
+              localStorage.setItem(
+                "current-profile",
+                JSON.stringify(currentUser)
+              );
+              window.location.href = `/${currentUser.handle}`;
+            }}
+          >
             <Logo>
               <BsPerson />
             </Logo>

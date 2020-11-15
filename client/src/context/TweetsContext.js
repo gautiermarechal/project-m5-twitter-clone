@@ -41,6 +41,17 @@ export const TweetsContextProvider = ({ children }) => {
       if (tweet.id === id) {
         tempIsLiked = !tweet.isLiked;
         const toggleNumLikes = tempIsLiked ? 1 : -1;
+        console.log(tweet);
+        localStorage.setItem(
+          "single-tweet",
+          JSON.stringify({
+            ...tweet,
+            avatarSrc: tweet.author.avatarSrc,
+            userName: tweet.author.handle,
+            userTag: tweet.author.displayName,
+          })
+        );
+        setSingletweet(tweet);
         return {
           ...tweet,
           numLikes: tweet.numLikes + toggleNumLikes,
@@ -52,7 +63,6 @@ export const TweetsContextProvider = ({ children }) => {
 
     setHomeFeedTweets(updatedHomeFeedTweets);
 
-    console.log(id);
     fetch(`http://localhost:31415/api/tweet/${id}/like`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -79,7 +89,6 @@ export const TweetsContextProvider = ({ children }) => {
 
     setHomeFeedTweets(updatedHomeFeedTweets);
 
-    console.log(id);
     fetch(`http://localhost:31415/api/tweet/${id}/retweet`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { COLORS } from "../../constants/constants";
 import { GoLocation } from "react-icons/go";
@@ -92,7 +92,9 @@ const Profile = () => {
   );
 };
 
-const MainContainer = styled.div``;
+const MainContainer = styled.div`
+  max-width: 668px;
+`;
 
 const Banner = styled.img`
   width: 668px;
