@@ -21,7 +21,7 @@ const SideBar = () => {
             <ItemLabel>Home</ItemLabel>
           </Item>
           <Item
-            to={`/${currentUser.handle}`}
+            to={`/profile/${currentUser.handle}`}
             onClick={() => {
               localStorage.setItem(
                 "current-profile",

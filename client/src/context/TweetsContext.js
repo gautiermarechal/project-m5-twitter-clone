@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
+import ErrorPage from "../components/ErrorPage";
+import { useCurrentUserContext } from "./CurrentUserContext";
 
 export const TweetsContext = createContext({});
 
@@ -18,7 +20,7 @@ export const TweetsContextProvider = ({ children }) => {
         json.tweetIds.forEach((id) => {
           temp.push(json.tweetsById[id]);
         });
-        setHomeFeedTweets(temp);
+        return setHomeFeedTweets(temp);
       });
   };
 

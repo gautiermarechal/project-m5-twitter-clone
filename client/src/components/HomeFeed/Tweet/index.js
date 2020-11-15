@@ -61,7 +61,7 @@ const Tweet = ({
     e.stopPropagation();
     handleCurrentProfilLocalStorage(profileObj);
     handleCurrentProfileState(profileObj.handle);
-    history.push(`/${profileObj.handle}`);
+    history.push(`/profile/${profileObj.handle}`);
     window.location.reload();
   };
 

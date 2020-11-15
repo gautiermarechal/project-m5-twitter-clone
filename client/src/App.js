@@ -35,11 +35,12 @@ const App = () => {
           </SideBarContainer>
           <AppContainer>
             <Switch>
-              {status === "loading" ? (
+              {status === "loading" && (
                 <Route path="/">
                   <Loading width={100} height={100} />
                 </Route>
-              ) : (
+              )}
+              {status === "idle" && (
                 <>
                   <Route exact path="/">
                     <PageTitle>Home</PageTitle>
@@ -55,14 +56,12 @@ const App = () => {
                   <Route path="/tweet/:tweetId">
                     <TweetDetails />
                   </Route>
-                  <Route path="/:profileId">
+                  <Route path="/profile/:profileId">
                     <Profile />
-                  </Route>
-                  <Route path="">
-                    <ErrorPage />
                   </Route>
                 </>
               )}
+              {status === "error" && <ErrorPage />}
             </Switch>
           </AppContainer>
         </Router>
